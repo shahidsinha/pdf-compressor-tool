@@ -1,0 +1,14 @@
+{
+  "name": "pdf-compressor-tool",
+  "version": "1.0.0",
+  "description": "PDF Compressor Tool using ILovePDF API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@ilovepdf/ilovepdf-nodejs": "^1.0.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.2"
+  }
+}
