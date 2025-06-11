@@ -1,6 +1,6 @@
 {
   "name": "pdf-compressor-tool",
-  "version": "1.0.0",
+  "@ilovepdf/ilovepdf-nodejs": "^1.0.0",
   "description": "PDF Compressor Tool using ILovePDF API",
   "main": "server.js",
   "scripts": {
