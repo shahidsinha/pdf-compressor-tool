@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Compressor Tool</title>
+  <style>
+    body { font-family: Arial; background: #f7f7f7; padding: 20px; }
+    .container { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto; }
+    .disclaimer { margin-top: 20px; font-size: 0.9em; color: #666; }
+    input, select, button { margin: 10px 0; padding: 8px; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>PDF Compressor Tool</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="pdfs" accept=".pdf" multiple required />
+      <select name="compression">
+        <option value="extreme">Extreme</option>
+        <option value="recommended" selected>Recommended</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit">Compress PDF</button>
+    </form>
+    <div class="disclaimer">
+      Created by Rupixl • This tool is provided for educational and user convenience purposes only. We do not collect or store any user data.
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const res = await fetch("/compress", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById("result").innerHTML = data.files.map(f => 
+          \`<p>\${f.originalName} — <a href="\${f.download}" target="_blank">Download</a></p>\`
+        ).join("");
+      } else {
+        document.getElementById("result").textContent = "Error: " + data.message;
+      }
+    });
+  </script>
+</body>
+</html>
